@@ -20,7 +20,7 @@ wss.on('connection', (ws) => {
         let object = JSON.parse(message);
         console.log(`message: ${object.type} has val: ${object.val}`);
         wss.clients.forEach((client) => {
-            client.send(new Date().toTimeString());
+            client.send(message);
         });
       });
     ws.on('value', (data) => {
