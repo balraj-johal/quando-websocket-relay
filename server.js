@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
     ws.on('close', () => console.log('Client disconnected'));
 
     ws.on('message', function incoming(message) {
-        console.log('received: %s', message);
+        console.log(`message: ${message.type} has val: ${message.val}`);
       });
     ws.on('value', (data) => {
         console.log("value seen, with data: ", data)
