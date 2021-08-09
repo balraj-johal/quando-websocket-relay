@@ -21,6 +21,11 @@ wss.on('connection', (ws) => {
     })
 });
 
+wss.on('value', (ws) => {
+    console.log('val recieved');
+});
+
+
 //broadcast updates per second
 setInterval(() => {
     wss.clients.forEach((client) => {
