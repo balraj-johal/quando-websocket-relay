@@ -14,15 +14,29 @@ const wss = new Server({ server });
 // begin listening for websocket connections
 wss.on('connection', (ws) => {
     console.log('Client connected');
-    ws.on('close', () => console.log('Client disconnected'));
+
+    let timer = 200;
+    let tickDownTimer = setInterval(() => {
+        if (timer > -1) {
+            timer = timer - 10;
+        }
+    }, 10)
+
+    ws.on('close', () => {
+        console.log('Client disconnected')
+        clearInterval(tickDownTimer);
+    });
 
     ws.on('message', function incoming(message) {
         let object = JSON.parse(message);
         console.log(`message: ${object.type} has val: ${object.val}`);
-        wss.clients.forEach((client) => {
-            console.log("sending: ", JSON.stringify(object))
-            client.send(JSON.stringify(object));
-        });
+
+        if (timer <= 0) {
+            wss.clients.forEach((client) => {
+                console.log("sending: ", JSON.stringify(object))
+                client.send(JSON.stringify(object));
+            });
+        }
     });
 });
 
