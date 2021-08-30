@@ -46,8 +46,8 @@ wss.on('value', (ws) => {
 
 
 //broadcast updates per second
-setInterval(() => {
-    wss.clients.forEach((client) => {
-        client.send(new Date().toTimeString());
-    });
-}, 1000);
+// setInterval(() => {
+//     wss.clients.forEach((client) => {
+//         client.send(new Date().toTimeString());
+//     });
+// }, 1000);
